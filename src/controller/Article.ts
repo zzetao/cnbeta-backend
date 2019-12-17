@@ -2,6 +2,9 @@ import { Request, Response } from 'express'
 import { getManager } from 'typeorm'
 import { Article } from '../entity/Article'
 import { getArticleByCB } from '../service/Article'
+import logger from '../util/logger'
+
+const TAG = 'Article'
 
 export async function getArticleByIdAction(request: Request, response: Response) {
     const articleRepository = getManager().getRepository(Article)
@@ -18,10 +21,13 @@ export async function getArticleByIdAction(request: Request, response: Response)
     // 1. 从 DB 取
     let article = await articleRepository.findOne({ sid })
 
+    logger.info(`${TAG} get article by db -> ${!!article}`)
+
     // 2. 取不到从源站取
     if (!article) {
         const source = await getArticleByCB(sid)
         article = await articleRepository.save(source)
+        logger.info(`${TAG} get article by source -> ${!!article}`)
     }
 
     if (!article) {

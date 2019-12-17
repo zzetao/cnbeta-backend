@@ -1,6 +1,9 @@
 import * as cheerio from 'cheerio'
 import { IArticle } from '../entity/Article'
 import axios from '../util/axios'
+import logger from '../util/logger'
+
+const TAG = '[ArticleService]'
 
 const headers = {
     // TODO: add cookie
@@ -16,7 +19,11 @@ export function getArticleUrlBySid(sid: number): string {
 export async function getArticleByCB(sid: number): Promise<IArticle | undefined> {
     let article: IArticle
     const url = getArticleUrlBySid(sid)
+    logger.info(`${TAG} fetch url -> ${url}`)
     const response = await axios.get(url, { responseType: 'text', headers })
+    logger.info(`${TAG} fetch response ${response.status}, response length ${response.data.length}`)
+
+    // TODO: 异常情况 (1. 文章不存在 ...)
     if (response.status === 200) {
         const $ = cheerio.load(response.data, { decodeEntities: false })
         const title = $('.article-tit').text()

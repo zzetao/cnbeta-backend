@@ -4,10 +4,10 @@ import { Request, Response } from 'express'
 import 'reflect-metadata'
 import { createConnection } from 'typeorm'
 import { AppRoutes } from './routes'
+import logger from './util/logger'
 
 createConnection()
     .then(async () => {
-        // create express app
         const app = express()
         app.use(bodyParser.json())
 
@@ -21,9 +21,12 @@ createConnection()
             })
         })
 
-        // run app
-        app.listen(3000)
+        const port = 3000
+        app.listen(port)
 
-        console.log('Express application is up and running on port 3000')
+        logger.info(`application running on port ${port}, env: ${process.env.NODE_ENV}`)
     })
-    .catch(error => console.log('TypeORM connection error: ', error))
+    .catch(error => {
+        logger.error('Typeorm connection error')
+        logger.error(error)
+    })

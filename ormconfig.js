@@ -1,4 +1,5 @@
 const config = require('./config.json')
+const TypeormLogger = require('./dist/util/TypeormLogger')
 
 module.exports = {
     type: 'mysql',
@@ -16,4 +17,7 @@ module.exports = {
         migrationsDir: 'dist/migration',
         subscribersDir: 'dist/subscriber',
     },
+    logging: 'all',
+    logger: new TypeormLogger.default(),
+    maxQueryExecutionTime: 1000,
 }
