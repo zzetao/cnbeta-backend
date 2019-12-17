@@ -7,7 +7,7 @@ module.exports = {
     username: config.mysql.username,
     password: config.mysql.password,
     database: config.mysql.database,
-    synchronize: true,
+    synchronize: false,
     entities: ['dist/entity/*.js'],
     subscribers: ['dist/subscriber/*.js'],
     migrations: ['dist/migration/*.js'],

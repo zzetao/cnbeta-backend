@@ -3,9 +3,9 @@ import { Column, CreateDateColumn, Entity, PrimaryColumn, PrimaryGeneratedColumn
 export interface IArticle {
     sid: number
     title: string
-    excerpt: string
+    excerpt?: string
     content: string
-    source_name: string
+    source_name?: string
     source_link?: string
     input_time: Date
 }
@@ -30,6 +30,7 @@ export class Article implements IArticle {
     @Column({
         type: 'text',
         comment: '文章摘要',
+        nullable: true,
     })
     excerpt: string
 
@@ -43,12 +44,14 @@ export class Article implements IArticle {
         type: 'varchar',
         length: 255,
         comment: '来源名称',
+        nullable: true,
     })
     source_name: string
 
     @Column({
         type: 'varchar',
         length: 255,
+        nullable: true,
         comment: '来源链接',
     })
     source_link: string
