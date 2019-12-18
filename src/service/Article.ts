@@ -16,6 +16,10 @@ export function getArticleUrlBySid(sid: number): string {
     return `https://m.cnbeta.com/view/${sid}.htm`
 }
 
+export function replaceUrl(content: string) {
+    return content.replace(/static.cnbetacdn.com/g, 'cnbeta-static.oss-cn-shenzhen.aliyuncs.com')
+}
+
 export async function getArticleByCB(sid: number): Promise<IArticle | undefined> {
     let article: IArticle
     const url = getArticleUrlBySid(sid)
@@ -30,8 +34,8 @@ export async function getArticleByCB(sid: number): Promise<IArticle | undefined>
         const input_time = new Date($('.article-byline .time').text())
         const source_name = $('.article-byline > span').text()
         const source_link = $('.article-byline > span > a').attr('href')
-        const excerpt = $('.article-summ p').html()
-        const content = $('#artibody').html()
+        const excerpt = replaceUrl($('.article-summ p').html())
+        const content = replaceUrl($('#artibody').html())
         article = {
             sid,
             title,

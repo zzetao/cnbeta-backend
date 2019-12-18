@@ -1,7 +1,7 @@
 import { Logger } from 'typeorm'
 import logger from './logger'
 
-const TAG = 'ORM'
+const TAG = '[ORM]'
 
 export default class implements Logger {
     /**

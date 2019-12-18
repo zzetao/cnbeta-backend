@@ -4,7 +4,7 @@ import { Article } from '../entity/Article'
 import { getArticleByCB } from '../service/Article'
 import logger from '../util/logger'
 
-const TAG = 'Article'
+const TAG = '[ArticleController]'
 
 export async function getArticleByIdAction(request: Request, response: Response) {
     const articleRepository = getManager().getRepository(Article)
