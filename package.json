@@ -24,6 +24,7 @@
     "cheerio": "^1.0.0-rc.3",
     "express": "^4.16.3",
     "mysql": "^2.15.0",
+    "pm2": "^4.2.1",
     "typeorm": "^0.2.0",
     "winston": "^3.2.1",
     "winston-daily-rotate-file": "^4.4.0"
@@ -32,6 +33,9 @@
     "start": "NODE_ENV=production yarn build && NODE_ENV=production node dist/index.js",
     "dev": "yarn build && node dist/index.js",
     "build": "tsc",
-    "typeorm": "typeorm"
+    "typeorm": "typeorm",
+    "prod:start": "NODE_ENV=production yarn build && pm2 start pm2.config.js",
+    "prod:reload": "NODE_ENV=production yarn build && pm2 reload pm2.config.js",
+    "prod:stop": "pm2 stop pm2.config.js"
   }
 }
