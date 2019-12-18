@@ -2,6 +2,7 @@ import * as cheerio from 'cheerio'
 import { IArticle } from '../entity/Article'
 import axios from '../util/axios'
 import logger from '../util/logger'
+const config = require('../../config.json')
 
 const TAG = '[ArticleService]'
 
@@ -17,7 +18,7 @@ export function getArticleUrlBySid(sid: number): string {
 }
 
 export function replaceUrl(content: string) {
-    return content.replace(/static.cnbetacdn.com/g, 'cnbeta-static.oss-cn-shenzhen.aliyuncs.com')
+    return content.replace(/static.cnbetacdn.com/g, config['app']['static-cdn-host'])
 }
 
 export async function getArticleByCB(sid: number): Promise<IArticle | undefined> {

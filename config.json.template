@@ -1,0 +1,12 @@
+{
+    "mysql": {
+        "host": "localhost",
+        "port": 3306,
+        "username": "root",
+        "password": "",
+        "database": "cnbeta"
+    },
+    "app": {
+        "static-cdn-host": "cnbeta-static.example.com"
+    }
+}
